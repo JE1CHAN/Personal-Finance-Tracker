@@ -1,11 +1,11 @@
 :root {
-  --primary: #ed254e; /* Indigo */
+  --primary: #0099ff8c; /* Indigo */
   --primary-hover: #93032e;
   --bg-color: #020617; /* Light Grey */
   --card-bg: #ffffff;
-  --text-main: #1f2937;
-  --text-muted: #6b7280;
-  --border: #e5e7eb;
+  --text-main: #f7f7f7;
+  --text-muted: #9aa0ac;
+  --border: #e5e7eb71;
   --success: #10b981; /* Green */
   --danger: #ef4444; /* Red */
 }
@@ -34,7 +34,7 @@ h1 {
   font-size: 4rem;
   font-weight: 800;
   text-align: center;
-  background: linear-gradient(to bottom, #ffffff, #94a3b8);
+  background: linear-gradient(to bottom, #ffffff, #6896d6);
   -webkit-background-clip: text;
   color: transparent;
   margin-bottom: 1rem;
@@ -58,16 +58,12 @@ h1 {
   min-width: 300px;
 }
 
-/* =========================================
-           3. COMPONENT STYLES
-           ========================================= */
-
 /* Navbar */
 .navbar {
-  background-color: var(--bg-color);
   padding: 1rem 0;
   margin-bottom: 2rem;
   position: fixed;
+  width: 100vw;
   z-index: 30;
 }
 

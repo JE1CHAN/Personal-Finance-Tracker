@@ -23,6 +23,100 @@
     opacity 1s ease;
 }
 
+.btn-back {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.btn-back:hover {
+  color: white;
+}
+
+.content-container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.header-text h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+/* Flex Cards */
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.card {
+  flex: 1;
+  min-width: 250px;
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid #1e293b;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  transition:
+    transform 0.3s,
+    background 0.3s;
+}
+
+.card:hover {
+  background: rgba(30, 41, 59, 0.8);
+  transform: translateY(-5px);
+  border-color: #4f46e5;
+}
+
+.card-icon {
+  margin-bottom: 1rem;
+  color: #818cf8;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.card p {
+  font-size: 1rem;
+  text-align: left;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  .card-row {
+    flex-direction: column;
+  }
+  .header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
 /* --- Welcome Slide Specifics --- */
 #welcome-section {
   z-index: 10;
@@ -42,8 +136,8 @@
 /* --- Content Slide Specifics --- */
 #content-section {
   z-index: 5;
+  margin-top: 9em;
   background-color: #020617;
-  /* Default State: Hidden below and transparent */
   opacity: 0;
   transform: translateY(100px);
   pointer-events: none;
@@ -54,5 +148,5 @@
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-  z-index: 20; /* Bring to front */
+  z-index: 20;
 }

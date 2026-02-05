@@ -1,3 +1,5 @@
+lucide.createIcons();
+
 const welcomeSection = document.getElementById("welcome-section");
 const contentSection = document.getElementById("content-section");
 const nextBtn = document.getElementById("btn-next");
