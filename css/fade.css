@@ -1,0 +1,58 @@
+/* Container for the overlapping slides */
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Common Slide Styles */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition:
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1s ease;
+}
+
+/* --- Welcome Slide Specifics --- */
+#welcome-section {
+  z-index: 10;
+  background: radial-gradient(circle at center, #1e1b4b 0%, #020617 70%);
+  /* Default State: Visible and centered */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* When 'slide-up' is added, it moves up and fades out */
+#welcome-section.slide-up {
+  opacity: 0;
+  transform: translateY(-100px);
+  pointer-events: none; /* User can't click it while hidden */
+}
+
+/* --- Content Slide Specifics --- */
+#content-section {
+  z-index: 5;
+  background-color: #020617;
+  /* Default State: Hidden below and transparent */
+  opacity: 0;
+  transform: translateY(100px);
+  pointer-events: none;
+}
+
+/* When 'active' is added, it moves to center and fades in */
+#content-section.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 20; /* Bring to front */
+}

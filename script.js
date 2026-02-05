@@ -1,4 +1,4 @@
-// --- TEMPLATE LOGIC ---
+// --- DATA SIMULATION ---
 let transactions = [
   {
     id: 1,
@@ -18,61 +18,59 @@ let transactions = [
   },
   {
     id: 3,
-    desc: "Netflix Subscription",
-    amount: 14.99,
+    desc: "Electric Bill",
+    amount: 85.0,
     type: "expense",
-    category: "Entertainment",
+    category: "Utilities",
     date: "2023-10-05",
   },
 ];
 
-// 1. Initial Render
+// --- EVENTS ---
 document.addEventListener("DOMContentLoaded", () => {
   renderList();
   updateSummary();
 });
 
-// 2. Handle Form Submit
 document.getElementById("transaction-form").addEventListener("submit", (e) => {
   e.preventDefault();
 
-  // Get values from inputs
+  // 1. Get values
   const desc = document.getElementById("desc").value;
   const amount = parseFloat(document.getElementById("amount").value);
   const type = document.getElementById("type").value;
-  const categorySelect = document.getElementById("category");
-  const categoryName =
-    categorySelect.options[categorySelect.selectedIndex].text;
+  const category = document.getElementById("category").value;
 
-  // Create new object
+  // 2. Create Object
   const newTransaction = {
-    id: Date.now(), // temporary ID
+    id: Date.now(),
     desc: desc,
     amount: amount,
     type: type,
-    category: categoryName,
+    category: category,
     date: new Date().toISOString().split("T")[0],
   };
 
-  // Add to array (In real app: Send POST request to MySQL here)
+  // 3. Update Data Array
   transactions.unshift(newTransaction);
 
-  // Clear inputs
+  // 4. Reset Form
   document.getElementById("desc").value = "";
   document.getElementById("amount").value = "";
 
-  // Update UI
+  // 5. Update UI
   renderList();
   updateSummary();
 });
 
-// 3. Render the Table
+// --- UI FUNCTIONS ---
 function renderList() {
   const listEl = document.getElementById("transaction-list");
   const emptyState = document.getElementById("empty-state");
 
   listEl.innerHTML = "";
 
+  // Show empty state if needed
   if (transactions.length === 0) {
     emptyState.classList.remove("hidden");
     return;
@@ -83,42 +81,28 @@ function renderList() {
   transactions.forEach((t) => {
     const row = document.createElement("tr");
 
-    // Color logic
-    const amountClass =
-      t.type === "income" ? "text-emerald-600" : "text-rose-600";
+    // Determine CSS classes based on data
+    const amountClass = t.type === "income" ? "text-success" : "text-danger";
     const sign = t.type === "income" ? "+" : "-";
 
-    // Category badge colors
-    const badgeColors = {
-      Food: "bg-orange-100 text-orange-800",
-      Salary: "bg-green-100 text-green-800",
-      Rent: "bg-red-100 text-red-800",
-      Utilities: "bg-blue-100 text-blue-800",
-      Entertainment: "bg-purple-100 text-purple-800",
-    };
-    const badgeClass = badgeColors[t.category] || "bg-gray-100 text-gray-800";
+    // Badge Logic
+    let badgeClass = "badge-default";
+    if (t.category === "Food") badgeClass = "badge-food";
+    if (t.category === "Rent") badgeClass = "badge-rent";
+    if (t.category === "Utilities") badgeClass = "badge-utilities";
+    if (t.category === "Salary") badgeClass = "badge-salary";
+    if (t.category === "Entertainment") badgeClass = "badge-ent";
 
     row.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">${t.desc}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${badgeClass}">
-                            ${t.category}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${t.date}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-bold ${amountClass}">
-                        ${sign}$${t.amount.toFixed(2)}
-                    </td>
+                    <td>${t.desc}</td>
+                    <td><span class="badge ${badgeClass}">${t.category}</span></td>
+                    <td style="color: var(--text-muted); font-size: 0.85rem;">${t.date}</td>
+                    <td class="text-right ${amountClass}">${sign}$${t.amount.toFixed(2)}</td>
                 `;
     listEl.appendChild(row);
   });
 }
 
-// 4. Update Math
 function updateSummary() {
   let income = 0;
   let expense = 0;
@@ -137,7 +121,7 @@ function updateSummary() {
 }
 
 function clearList() {
-  if (confirm("Are you sure you want to clear the list?")) {
+  if (confirm("Are you sure you want to clear all transactions?")) {
     transactions = [];
     renderList();
     updateSummary();

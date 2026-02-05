@@ -1,25 +1,323 @@
+:root {
+  --primary: #ed254e; /* Indigo */
+  --primary-hover: #93032e;
+  --bg-color: #020617; /* Light Grey */
+  --card-bg: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --success: #10b981; /* Green */
+  --danger: #ef4444; /* Red */
+}
+
+* {
+  box-sizing: border-box; /* Essential: Padding doesn't add to width */
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f3f4f6;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  overflow: hidden;
 }
 
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(to bottom, #ffffff, #94a3b8);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* Allows stacking on mobile */
+  margin-bottom: 24px;
+}
+
+/* Column Sizes */
+.col-1 {
+  flex: 1;
+  min-width: 300px; /* Stacks if screen is too small */
+}
+
+.col-2 {
+  flex: 2; /* Takes twice the space of col-1 */
+  min-width: 300px;
+}
+
+/* =========================================
+           3. COMPONENT STYLES
+           ========================================= */
+
+/* Navbar */
+.navbar {
+  background-color: var(--bg-color);
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  position: fixed;
+  z-index: 30;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand span {
+  color: var(--primary);
+}
+
+.status-badge {
+  background-color: #e0e7ff;
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Cards */
 .card {
-  background: white;
-  border-radius: 16px;
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  height: 100%; /* Ensures all cards in a row match height */
+  display: flex;
+  flex-direction: column;
 }
 
-.card:hover {
-  transform: translateY(-2px);
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
 }
 
-.input-field {
-  transition: all 0.3s;
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-.input-field:focus {
-  border-color: #3b82f6;
+/* Summary Cards (Top Row) */
+.summary-card {
+  flex-direction: row; /* Icon left, text right */
+  justify-content: space-between;
+  align-items: flex-start;
+  border-left: 5px solid transparent;
+}
+
+/* Helper classes for colors */
+.border-indigo {
+  border-left-color: var(--primary);
+}
+.border-green {
+  border-left-color: var(--success);
+}
+.border-red {
+  border-left-color: var(--danger);
+}
+
+.summary-val {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.summary-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.icon-box {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.bg-indigo-light {
+  background: #e0e7ff;
+  color: var(--primary);
+}
+.bg-green-light {
+  background: #d1fae5;
+  color: var(--success);
+}
+.bg-red-light {
+  background: #fee2e2;
+  color: var(--danger);
+}
+
+/* =========================================
+           4. FORM STYLES
+           ========================================= */
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+button.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+button.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* =========================================
+           5. TABLE STYLES
+           ========================================= */
+.table-container {
+  overflow-x: auto; /* Scroll on small screens */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px; /* Forces scroll on mobile */
+}
+
+thead tr {
+  background-color: #f9fafb;
+  text-align: left;
+}
+
+th {
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.text-right {
+  text-align: right;
+}
+.text-success {
+  color: var(--success);
+  font-weight: bold;
+}
+.text-danger {
+  color: var(--danger);
+  font-weight: bold;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-food {
+  background: #ffedd5;
+  color: #9a3412;
+}
+.badge-rent {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.badge-utilities {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.badge-salary {
+  background: #d1fae5;
+  color: #065f46;
+}
+.badge-ent {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+.badge-default {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* Utilities */
+.hidden {
+  display: none;
 }
